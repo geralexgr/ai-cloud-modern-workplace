@@ -29,7 +29,7 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'init'
-        workingDirectory: '$(Build.SourcesDirectory)/.'
+        workingDirectory: '$(Build.SourcesDirectory)/src'
         backendServiceArm: $(SUB_NAME)
         backendAzureRmResourceGroupName: $(RG_NAME)
         backendAzureRmStorageAccountName: 'terraform'
@@ -41,8 +41,8 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'apply'
-        workingDirectory: '$(Build.SourcesDirectory)/src/azure'
-        commandOptions: '-var-file=$(Build.SourcesDirectory)/src/envs/dev.tfvars'
+        workingDirectory: '$(Build.SourcesDirectory)/src/terraform'
+        commandOptions: '-var-file=$(Build.SourcesDirectory)/src/terraform/envs/dev.tfvars'
         environmentServiceNameAzureRM: 'geralexgr-azure'
 
 
