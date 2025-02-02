@@ -43,7 +43,7 @@ stages:
         command: 'apply'
         workingDirectory: '$(Build.SourcesDirectory)/src/terraform'
         commandOptions: '-var-file=$(Build.SourcesDirectory)/src/terraform/envs/dev.tfvars'
-        environmentServiceNameAzureRM: 'geralexgr-azure'
+        environmentServiceNameAzureRM: 'MVP(43709a15-a023-45e7-90a6-e30c5ffad83e)'
 
 
 
