@@ -7,7 +7,7 @@ variables:
 - name: SUB_NAME
   value: 43709a15-a023-45e7-90a6-e30c5ffad83e
 - name: RG_NAME
-  value: chaos
+  value: chaos_terraform
 
 pool:
   vmImage: ubuntu-latest
