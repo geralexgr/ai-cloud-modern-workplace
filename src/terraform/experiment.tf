@@ -21,7 +21,7 @@ resource "azurerm_resource_group" "chaos_rg" {
 
 data "azurerm_windows_web_app" "chaos_web_app" {
   name                = "chaos"
-  resource_group_name = var.resource_group
+  resource_group_name = var.webapp_resource_group
 }
 
 

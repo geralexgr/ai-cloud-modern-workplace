@@ -13,3 +13,8 @@ variable "region" {
   description = "Azure region"
   type        = string
 }
+
+variable "webapp_resource_group" {
+  description = "Azure region"
+  type        = string
+}
