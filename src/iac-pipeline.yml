@@ -30,8 +30,8 @@ stages:
         provider: 'azurerm'
         command: 'init'
         workingDirectory: '$(Build.SourcesDirectory)/src'
-        backendServiceArm: $(SUB_NAME)
-        backendAzureRmResourceGroupName: $(RG_NAME)
+        backendServiceArm: 'MVP(43709a15-a023-45e7-90a6-e30c5ffad83e)'
+        backendAzureRmResourceGroupName: '$(RG_NAME)'
         backendAzureRmStorageAccountName: 'terraform'
         backendAzureRmContainerName: 'state'
         backendAzureRmKey: 'file'
