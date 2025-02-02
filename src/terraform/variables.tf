@@ -1,20 +1,26 @@
 variable "subscription_id" {
-  description = "Subscription Id"
+  description = "subscription id"
   type        = string
 }
 
 variable "resource_group" {
-  description = "Azure resource group"
+  description = "azure resource group"
   type        = string
 }
 
 
 variable "region" {
-  description = "Azure region"
+  description = "azure region"
   type        = string
 }
 
 variable "webapp_resource_group" {
-  description = "Azure region"
+  description = "web app resource group"
+  type        = string
+}
+
+
+variable "experiment_name" {
+  description = "experiment name"
   type        = string
 }

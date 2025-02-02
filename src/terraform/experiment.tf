@@ -38,7 +38,7 @@ resource "azurerm_chaos_studio_capability" "example" {
 }
 
 resource "azurerm_chaos_studio_experiment" "app_service_shutdown" {
-  name                = "app-service-shutdown-experiment"
+  name                = var.experiment_name
   location            = azurerm_resource_group.chaos_rg.location
   resource_group_name = azurerm_resource_group.chaos_rg.name
 
