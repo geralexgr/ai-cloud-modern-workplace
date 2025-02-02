@@ -37,14 +37,31 @@ resource "azurerm_chaos_studio_capability" "example" {
   capability_type        = "Stop-1.0"
 }
 
+
+resource "azurerm_user_assigned_identity" "identity" {
+  name                = "uami-chaos-experiment"
+  location            = azurerm_resource_group.chaos_rg.location
+  resource_group_name = azurerm_resource_group.chaos_rg.name
+}
+
+# Assign a Role to the UAMI (Chaos Experiment Contributor)
+resource "azurerm_role_assignment" "chaos_studio_role" {
+  scope                = azurerm_resource_group.chaos_rg.id
+  role_definition_name = "Chaos Experiment Contributor"
+  principal_id         = azurerm_user_assigned_identity.identity.principal_id
+}
+
+
 resource "azurerm_chaos_studio_experiment" "app_service_shutdown" {
   name                = var.experiment_name
   location            = azurerm_resource_group.chaos_rg.location
   resource_group_name = azurerm_resource_group.chaos_rg.name
 
   identity {
-    type = "SystemAssigned"
+    type         = "UserAssigned"
+    identity_ids = [azurerm_user_assigned_identity.identity.id]
   }
+
   
   selectors {
     name                    = "Selector1"
