@@ -9,38 +9,38 @@ terraform {
 
 provider "azurerm" {
    features {}
-   subscription_id = "43709a15-a023-45e7-90a6-e30c5ffad83e"
+   subscription_id = var.subscription_id
    skip_provider_registration = "true"
 }
 
-resource "azurerm_resource_group" "example" {
-  name     = "chaos_terraform"
-  location = "West Europe"
+resource "azurerm_resource_group" "chaos_rg" {
+  name     = var.resource_group
+  location = var.region
 }
 
 
-data "azurerm_windows_web_app" "example" {
+data "azurerm_windows_web_app" "chaos_web_app" {
   name                = "chaos"
-  resource_group_name = "CHAOS"
+  resource_group_name = var.resource_group
 }
 
 
-resource "azurerm_chaos_studio_target" "example" {
-  location           = "West Europe"
-  target_resource_id = data.azurerm_windows_web_app.example.id
+resource "azurerm_chaos_studio_target" "chaos_target" {
+  location           = var.region
+  target_resource_id = data.azurerm_windows_web_app.chaos_web_app.id
   target_type        = "Microsoft-AppService"
 }
 
 
 resource "azurerm_chaos_studio_capability" "example" {
-  chaos_studio_target_id = azurerm_chaos_studio_target.example.id
+  chaos_studio_target_id = azurerm_chaos_studio_target.chaos_target.id
   capability_type        = "Stop-1.0"
 }
 
 resource "azurerm_chaos_studio_experiment" "app_service_shutdown" {
   name                = "app-service-shutdown-experiment"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
+  location            = azurerm_resource_group.chaos_rg.location
+  resource_group_name = azurerm_resource_group.chaos_rg.name
 
   identity {
     type = "SystemAssigned"
@@ -48,7 +48,7 @@ resource "azurerm_chaos_studio_experiment" "app_service_shutdown" {
   
   selectors {
     name                    = "Selector1"
-    chaos_studio_target_ids = [azurerm_chaos_studio_target.example.id]
+    chaos_studio_target_ids = [azurerm_chaos_studio_target.chaos_target.id]
   }
 
   steps {
