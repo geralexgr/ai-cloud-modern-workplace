@@ -46,8 +46,8 @@ resource "azurerm_user_assigned_identity" "identity" {
 
 # Assign a Role to the UAMI (Chaos Experiment Contributor)
 resource "azurerm_role_assignment" "chaos_studio_role" {
-  scope                = azurerm_resource_group.chaos_rg.id
-  role_definition_name = "Chaos Experiment Contributor"
+  scope                = "/subscriptions/${var.subscription_id}"  # Subscription-level scope
+  role_definition_name = "Contributor"
   principal_id         = azurerm_user_assigned_identity.identity.principal_id
 }
 
