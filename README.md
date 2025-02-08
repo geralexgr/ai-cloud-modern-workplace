@@ -1,2 +1,3 @@
 # ai-cloud-modern-workplace
-Material for my chaos presentation
+Blog post:  
+https://blog.geralexgr.com/chaos-engineering/chaos-engineering-in-azure-automating-resilience-testing-with-terraform-pipelines
